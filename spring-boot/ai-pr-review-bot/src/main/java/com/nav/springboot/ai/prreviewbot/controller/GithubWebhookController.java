@@ -21,8 +21,7 @@ public class GithubWebhookController {
 
     @PostMapping("/github")
     public ResponseEntity<Void> handlePR(
-            @RequestHeader("X-GitHub-Event") String event,
-            @RequestHeader("X-Hub-Signature-256") String signature,
+            @RequestHeader("X-GitHub-Event") String eventType,
             @RequestBody Map<String, Object> payload) {
         String action = (String) payload.get("action");
         if ("opened".equals(action) || "synchronize".equals(action)) {
