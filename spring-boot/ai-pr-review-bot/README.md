@@ -19,3 +19,11 @@ Spring AI (LLM)
 Structured Review JSON
 ↓
 GitHub Comment API
+
+
+## Tech Stack
+- Spring Boot 3.x
+- Spring AI
+- GitHub REST API
+- OpenAI 
+- Webhook endpoint
