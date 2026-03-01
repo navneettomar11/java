@@ -21,12 +21,12 @@ public class GithubWebhookController {
     private PullRequestService pullRequestService;
 
     @PostMapping("/github")
-    public Mono<ResponseEntity<Void>> handlePR(
+    public ResponseEntity<Void> handlePR(
             @RequestHeader("X-GitHub-Event") String eventType,
             @RequestBody Map<String, Object> payload) {
         if ("pull_request".equals(eventType) || "synchronize".equals(eventType)) {
             pullRequestService.processPullRequest(payload);
         }
-        return Mono.just(ResponseEntity.ok().build());
+        return ResponseEntity.ok().build();
     }
 }
