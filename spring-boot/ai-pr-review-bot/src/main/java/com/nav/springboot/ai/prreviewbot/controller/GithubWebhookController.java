@@ -6,10 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -23,7 +20,10 @@ public class GithubWebhookController {
     private PullRequestService pullRequestService;
 
     @PostMapping("/github")
-    public ResponseEntity<Void> handlePR(@RequestBody Map<String, Object> payload) {
+    public ResponseEntity<Void> handlePR(
+            @RequestHeader("X-GitHub-Event") String event,
+            @RequestHeader("X-Hub-Signature-256") String signature,
+            @RequestBody Map<String, Object> payload) {
         String action = (String) payload.get("action");
         if ("opened".equals(action) || "synchronize".equals(action)) {
             pullRequestService.processPullRequest(payload);
