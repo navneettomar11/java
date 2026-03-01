@@ -9,7 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Map;
 
@@ -22,7 +22,7 @@ public class PullRequestService {
     private String githubToken;
 
     @Autowired
-    private RestTemplate restTemplate;
+    private WebClient webClient;
 
     @Autowired
     private CodeReviewService reviewService;
@@ -30,12 +30,13 @@ public class PullRequestService {
     public void processPullRequest(Map<String, Object> payload) {
         Map<String, Object> pr = (Map<String, Object>) payload.get("pull_request");
         String diffUrl = (String) pr.get("diff_url");
-        HttpHeaders headers = new HttpHeaders();
-        headers.setBearerAuth(this.githubToken);
-        HttpEntity<Void> entity = new HttpEntity<>(headers);
-        ResponseEntity<String> response =
-                restTemplate.exchange(diffUrl, HttpMethod.GET, entity, String.class);
-        String diff = response.getBody();
+        String diff = webClient.get()
+                .uri(diffUrl)
+                .header("Authorization", "Bearer " + this.githubToken)
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
         reviewService.reviewCode(diff, pr);
     }
 }
