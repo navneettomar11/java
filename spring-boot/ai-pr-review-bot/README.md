@@ -27,3 +27,10 @@ GitHub Comment API
 - GitHub REST API
 - OpenAI 
 - Webhook endpoint
+
+# Advanced Improvements
+Use Spring AI Tool Calling to:
+- Fetch full file content
+- Fetch previous commit history
+- Check test coverage API
+- Validate dependency vulnerabilities
