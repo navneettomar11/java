@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/webhook/github")
+@RequestMapping("/webhook")
 public class GithubWebhookController {
 
     private static final Logger logger = LoggerFactory.getLogger(GithubWebhookController.class);
 
-    @PostMapping("")
+    @PostMapping("/github")
     public ResponseEntity<Void> handlePR(@RequestBody Map<String, Object> payload) {
         logger.info("Payload: {} ", payload);
         return ResponseEntity.ok().build();
