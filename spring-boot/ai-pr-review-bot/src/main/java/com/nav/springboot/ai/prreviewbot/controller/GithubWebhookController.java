@@ -23,8 +23,7 @@ public class GithubWebhookController {
     public ResponseEntity<Void> handlePR(
             @RequestHeader("X-GitHub-Event") String eventType,
             @RequestBody Map<String, Object> payload) {
-        String action = (String) payload.get("action");
-        if ("opened".equals(action) || "synchronize".equals(action)) {
+        if ("pull_request".equals(eventType) || "synchronize".equals(eventType)) {
             pullRequestService.processPullRequest(payload);
         }
         return ResponseEntity.ok().build();
