@@ -8,3 +8,14 @@ It will:
 - Analyze code using Spring AI
 - Generate structured review
 - Post comments back to GitHub
+
+## High-Level Architecture
+GitHub Webhook → Spring Boot App
+↓
+PR Diff Fetcher
+↓
+Spring AI (LLM)
+↓
+Structured Review JSON
+↓
+GitHub Comment API
