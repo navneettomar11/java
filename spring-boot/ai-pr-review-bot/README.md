@@ -22,7 +22,7 @@ GitHub Comment API
 
 
 ## Tech Stack
-- Spring Boot 3.x
+- Spring Boot 4.x
 - Spring AI
 - GitHub REST API
 - OpenAI 
