@@ -24,7 +24,10 @@ public class GithubWebhookController {
 
     @PostMapping("/github")
     public ResponseEntity<Void> handlePR(@RequestBody Map<String, Object> payload) {
-        pullRequestService.processPullRequest(payload);
+        String action = (String) payload.get("action");
+        if ("opened".equals(action) || "synchronize".equals(action)) {
+            pullRequestService.processPullRequest(payload);
+        }
         return ResponseEntity.ok().build();
     }
 }
