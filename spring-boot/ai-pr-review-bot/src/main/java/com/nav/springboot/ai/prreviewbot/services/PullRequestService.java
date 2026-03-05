@@ -30,18 +30,8 @@ public class PullRequestService {
     public void processPullRequest(Map<String, Object> payload) {
         Map<String, Object> pr = (Map<String, Object>) payload.get("pull_request");
         String diffUrl = (String) pr.get("diff_url");
-        logger.info("PR: {}", pr);
-        logger.info("Diff URL {}", diffUrl);
-
-
-
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setBearerAuth(this.githubToken);
-        HttpEntity<Void> entity = new HttpEntity<>(headers);
-        ResponseEntity<String> response =
-                restTemplate.exchange(diffUrl, HttpMethod.GET, entity, String.class);
-        String diff = response.getBody();
-        reviewService.reviewCode(diff, pr);
+        String repo = (String) pr.get("");
+        String prNumber = (String) pr.get("");
+        reviewService.reviewCode(repo, prNumber, diffUrl);
     }
 }

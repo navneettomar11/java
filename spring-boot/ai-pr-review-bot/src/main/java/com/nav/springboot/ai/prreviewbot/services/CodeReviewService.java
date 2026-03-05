@@ -5,9 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Mono;
-
-import java.util.Map;
 
 @Service
 public class CodeReviewService {
@@ -19,8 +16,8 @@ public class CodeReviewService {
         this.chatClient = builder.build();
     }
 
-    public void reviewCode(String code, Map<String, Object> pr) {
-        String prompt = CodeReviewPromptTemplate.buildPrompt(code);
+    public void reviewCode(String repo, String prNumber, String diffUrl) {
+        String prompt = CodeReviewPromptTemplate.buildPrompt(repo, prNumber, diffUrl);
 
         String response = chatClient.prompt()
                 .user(prompt)
