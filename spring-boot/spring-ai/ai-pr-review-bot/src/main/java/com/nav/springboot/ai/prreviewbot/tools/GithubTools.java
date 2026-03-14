@@ -23,7 +23,8 @@ public class GithubTools{
         this.restTemplate = restTemplate;
     }
 
-    @Tool(name="get_pr_diff", description = "Fetches the diff of a Github pull request")
+    @Tool(name="get_pr_diff",
+            description = "Fetches the diff of a Github pull request")
     public String getPrDiff(String diffUrl) {
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth("GITHUB_TOKEN");

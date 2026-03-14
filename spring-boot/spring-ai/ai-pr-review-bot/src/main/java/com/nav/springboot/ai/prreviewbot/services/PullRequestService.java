@@ -30,8 +30,8 @@ public class PullRequestService {
     public void processPullRequest(Map<String, Object> payload) {
         Map<String, Object> pr = (Map<String, Object>) payload.get("pull_request");
         String diffUrl = (String) pr.get("diff_url");
-        String repo = (String) pr.get("");
-        String prNumber = (String) pr.get("");
-        reviewService.reviewCode(repo, prNumber, diffUrl);
+        String repo = (String)((Map<String,Object>)payload.get("repository")).get("name");
+        Integer prNumber = (Integer) pr.get("number");
+        reviewService.reviewCode(repo, prNumber.toString(), diffUrl);
     }
 }
