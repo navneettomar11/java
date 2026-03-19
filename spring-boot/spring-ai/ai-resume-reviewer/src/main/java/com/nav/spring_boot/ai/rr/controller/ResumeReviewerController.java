@@ -15,6 +15,7 @@ public class ResumeReviewerController {
     private ResumeReviewService resumeReviewService;
 
     @PostMapping("/review")
+    @CrossOrigin("*")
     public ResumeReview review(@RequestParam("file") MultipartFile file,
                                @RequestParam("targetRole") String targetRole){
 
