@@ -67,6 +67,9 @@ Form Data:
 }
 ```
 
+## Frontend UI
+![img.png](assets/img.png)
+
 ## Future Improvements
 - Resume vs Job Description embedding comparison
 - Token usage logging
