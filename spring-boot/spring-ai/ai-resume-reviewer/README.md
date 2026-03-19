@@ -76,4 +76,3 @@ Form Data:
 - Conversation memory
 - Role-based evaluation rubric
 - Dockerization
-- Frontend UI
